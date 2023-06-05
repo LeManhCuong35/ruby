@@ -2,8 +2,8 @@ require_relative 'staff'
 
 $BASE_SALARY = 3000
 
-staff_list = []
-hard_staff_list = []
+staff_list = Array.new()
+hard_staff_list = Array.new()
 
 puts "enter number of staff: "
 size = gets.chomp.to_i
@@ -25,22 +25,12 @@ size.times do
   end
 
   new_staff = Staff.new(name, id, department, working_time, ot)
-
   staff_list << new_staff
+
+  salary = new_staff.get_salary
+  hard_staff_list << new_staff if salary > 5000
 end
 
-staff_list.each do |staff|
-  salary = staff.working_time * $BASE_SALARY
-  salary = salary * 1.15 + staff.ot*$BASE_SALARY*1.5 if staff.department.upcase == "DEV"
-  salary = salary * 1.1 + staff.ot*$BASE_SALARY*1.5 if staff.department.upcase == "QA"
-  if salary.to_i > 5000
-    hard_staff_list << staff
-  end
-  
-  puts staff.inspect
-end
 
-puts "hard staff list: "
-hard_staff_list.each do |staff|
-  puts staff.inspect
-end
+puts "staff list: #{staff_list.inspect}"
+puts "hard staff list: #{hard_staff_list.inspect}"

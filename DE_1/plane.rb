@@ -2,11 +2,11 @@ class Plane
   require_relative 'module_price'
   include PriceModule
 
+  attr_accessor  :flight_attendant
+  
   def initialize flight_attendants
     @flight_attendants  = flight_attendants
   end
-
-  attr_accessor  :flight_attendant
 
   class << self
     def max_fly_speed
