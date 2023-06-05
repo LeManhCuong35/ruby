@@ -30,7 +30,9 @@ size.times do
 end
 
 staff_list.each do |staff|
-  salary = staff.working_time * $BASE_SALARY + staff.ot * $BASE_SALARY * 1.5
+  salary = staff.working_time * $BASE_SALARY
+  salary = salary * 1.15 + staff.ot*$BASE_SALARY*1.5 if staff.department.upcase == "DEV"
+  salary = salary * 1.1 + staff.ot*$BASE_SALARY*1.5 if staff.department.upcase == "QA"
   if salary.to_i > 5000
     hard_staff_list << staff
   end
